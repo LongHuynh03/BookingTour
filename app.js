@@ -1,8 +1,8 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+let createError = require("http-errors");
+let express = require("express");
+let path = require("path");
+let cookieParser = require("cookie-parser");
+let logger = require("morgan");
 const session = require('express-session');
 const mongoose = require("mongoose");
 
@@ -18,7 +18,7 @@ require("./components/review/ReviewModel");
 require("./components/bookingtour/BookingTourModel");
 require("./components/admin/AdminModel");
 
-var app = express();
+let app = express();
 
 //API
 const provinceAPIRouter = require("./routes/api/ProvinceAPI");
@@ -61,7 +61,7 @@ app.use(session({
 //mongoose
 mongoose
   .connect(
-    "mongodb+srv://tronglvbd:tronglvbd96@cluster0.lqywgym.mongodb.net/BNBTour?retryWrites=true&w=majority",
+    "mongodb+srv://bnbtour:ia1ATRwUP28Ohm6M@cluster0.lqywgym.mongodb.net/BNBTour?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

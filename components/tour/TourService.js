@@ -63,10 +63,12 @@ const getTourByFilter = async (
   dayFind
 ) => {
   try {
-    const parts = dayFind.split("/");
-    const ngayKhoiHanhDate = new Date(parts[2], parts[1] - 1, parts[0]);
-    const ngayKhoiHanhISO = ngayKhoiHanhDate.toISOString();
-
+    let departureDateFilter = {};
+    if (dayFind) {
+      const parts = dayFind.split("/");
+      const ngayKhoiHanhDate = new Date(parts[2], parts[1] - 1, parts[0]).toISOString();
+      departureDateFilter = { departure_date: { $gte: ngayKhoiHanhDate } };
+    }
     const tours = await tourModel.aggregate([
       {
         $lookup: {
@@ -78,20 +80,20 @@ const getTourByFilter = async (
       },
       {
         $match: {
-          departure_location:
-            departureLocation == ""
-              ? { $regex: "", $options: "i" }
-              : { $regex: departureLocation, $options: "i" },
-          "province.name":
-            locationProvinces == ""
-              ? { $regex: "", $options: "i" }
-              : { $regex: locationProvinces, $options: "i" },
-          is_popular: is_popular === "true" ? true : false,
+          departure_location: {
+            $regex: String(departureLocation ?? ""),
+            $options: "i",
+          },
+          "province.name": {
+            $regex: String(locationProvinces ?? ""),
+            $options: "i",
+          },
+          is_popular: is_popular === "true",
           price:
-            maxPrice == 0
-              ? { $gte: Number(minPrice), $lte: Number(1000000000000000) }
-              : { $gte: Number(minPrice), $lte: Number(maxPrice) },
-          departure_date: { $gte: new Date(ngayKhoiHanhISO) },
+            Number(maxPrice) === 0
+              ? { $gte: Number(minPrice) || 0, $lte: 1000000000000000 }
+              : { $gte: Number(minPrice) || 0, $lte: Number(maxPrice) },
+          ...departureDateFilter, // chỉ thêm nếu có dayFind
         },
       },
       {
