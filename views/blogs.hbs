@@ -1,0 +1,215 @@
+{{!-- <div id="preloader">
+    <div class="lds-ripple">
+        <div></div>
+        <div></div>
+    </div>
+</div> --}}
+
+<div id="main-wrapper">
+    <!--Nav header end-->
+    <div class="nav-header">
+        <a href="/" class="brand-logo">
+            <div class="column">
+                 <img
+          class="logo-abbr"
+          width="40px"
+          height="45px"
+          src="/images/logo.png"
+        />
+            </div>
+        </a>
+        <div class="nav-control">
+            <div class="hamburger">
+                <span class="line"></span><span class="line"></span><span class="line"></span>
+            </div>
+        </div>
+    </div>
+    <!--Nav header end-->
+
+    <!--Header start-->
+    <div class="header">
+        <div class="header-content">
+            <nav class="navbar navbar-expand">
+                <div class="collapse navbar-collapse justify-content-between">
+                    <div class="header-left">
+                        <div class="headaer-title">
+                            <h1 class="font-w600 mb-0">Bài viết</h1>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!--Header end ti-comment-alt-->
+
+    <!--Sidebar start-->
+    <div class="deznav">
+        <div class="deznav-scroll">
+            <ul class="metismenu" id="menu">
+                <li><a class="has-arrow " href="/" aria-expanded="false">
+                        <i class="flaticon-025-dashboard"></i>
+                        <span class="nav-text">Thống kê</span>
+                    </a>
+                </li>
+                <li><a class="has-arrow " href="/cpanel/users" aria-expanded="false">
+                        <i class="flaticon-006-brightness"></i>
+                        <span class="nav-text">Tài khoản</span>
+                    </a>
+                </li>
+                <li><a class="has-arrow " href="/cpanel/locations" aria-expanded="false">
+                        <i class="flaticon-017-clipboard"></i>
+                        <span class="nav-text">Điểm du lịch</span>
+                    </a>
+                </li>
+                <li><a class="has-arrow " href="/cpanel/tours" aria-expanded="false">
+                        <i class="flaticon-017-clipboard"></i>
+                        <span class="nav-text">Chuyến du lịch</span>
+                    </a>
+                </li>
+                <li><a class="has-arrow " href="/cpanel/events" aria-expanded="false">
+                        <i class="flaticon-086-star"></i>
+                        <span class="nav-text">Sự kiện</span>
+                    </a>
+                </li>
+                <li><a class="has-arrow " href="/cpanel/blogs" aria-expanded="false">
+                        <i class="flaticon-022-copy"></i>
+                        <span class="nav-text">Bài viết</span>
+                    </a>
+                </li>
+                <li><a class="has-arrow " href="/logout" aria-expanded="false">
+                        <i class="flaticon-061-outside"></i>
+                        <span class="nav-text">Đăng xuất</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--Sidebar end-->
+
+    <!--Content body start-->
+    <div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+    
+                        <div class="card">
+
+                                <div class="table-responsive">
+                                    <table
+                                        class="table border-0 display mb-4 dataTablesCard booking-table table-responsive-lg "
+                                        id="guestTable-all6">
+                                        <thead>
+                                            <tr>
+                                                <th>Nội dung</th>
+                                                <th>Người đăng</th>
+                                                <th>Thời gian</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each blogs}}
+                                            <tr>
+                                                <td>
+                                                    <div style="display: inline-flex;">
+                                                        <img width="200px"
+                height="130px"
+                style="margin-right:10px; border-radius: 10px;object-fit: cover; object-position: center;"  src="{{this.image}}" alt=""
+                                                        <div>
+                                                            <h4 class="mb-0 mt-1 fs-18 font-w500 text-nowrap">
+                                                                {{this.content}}
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                           <img   width="50"
+                height="50"
+                style="margin-right:10px; border-radius: 50px;object-fit: cover; object-position: center;"
+  src="{{this.user_id.avatar}}" alt="">
+                                                        <span
+                                                            class="fs-15 font-w500 text-nowrap">{{this.user_id.name}}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                  <span
+                                                            class="fs-15 font-w500 text-nowrap">{{this.created_at}}</span>
+                                                </td>
+                                                <td>  <div class="button-bx mt-2 mt-xl-0">
+                                       
+                                        <button onclick="confirmDelete('{{this._id}}');" class="btn btn-primary ms-sm-3 ms-0">
+                                            Ẩn
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M10 0C4.50742 0 0 4.50742 0 10C0 15.4926 4.50742 20 10 20C15.4926 20 20 15.4926 20 10C20 4.50742 15.4926 0 10 0ZM14.9719 13.3148L13.3148 14.9719L10 11.6571L6.68523 14.9719L5.02812 13.3148L8.34289 10L5.02812 6.68523L6.68523 5.02812L10 8.34289L13.3148 5.02812L14.9719 6.68523L11.6571 10L14.9719 13.3148Z"
+                                                    fill="white" />
+                                            </svg>
+                                        </button>
+                                    </div></td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                           
+                            </div>
+
+                    
+    
+          
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const fectAPI = async (url, option) => {
+        const fech = await fetch(url, option);
+        return fech.json();
+    }
+    const deleteProduct = async (id) => {
+        const url = `/cpanel/blogs/${id}/deleted`;
+        const options = {
+            method: "get",
+            headers: { 'Content-Type': 'application/json' }
+        };
+        try {
+            const result = await fectAPI(url, options);
+            console.log(result);
+            if (result) {
+                swal({
+                    title: "Success",
+                    text: "Delete Success !!!",
+                    icon: "success",
+                    buttons: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        window.location.reload();
+                    }
+                });
+            } else {
+                alert("Delete Failed!");
+            }
+        }
+        catch (e) {
+            console.log("Delete failed: " + e);
+        }
+    }
+
+    const confirmDelete = (id) => {
+        console.log("Delete: " + id);
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    deleteProduct(id);
+                }
+            });
+    }
+
+</script>
